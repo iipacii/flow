@@ -52,3 +52,4 @@ print(tester(get_repository_files_contents("Meskine-Yasser/AI_Expert_System")))
 if __name__ == '__main__':
     render_mermaid(tester(get_repository_files_contents("Meskine-Yasser/AI_Expert_System")))
     print("render complete")
+
