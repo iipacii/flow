@@ -11,14 +11,15 @@ def extract_and_print(content):
 # Replace 'your_api_key' with your actual OpenAI API key
 # openai.api_key = ''
 
-openai.api_key = 'sk-proj-n6QYMzfgWDC2Oa5sUzwCT3BlbkFJXcoNFfyHvmMyRWOnL2Na'
+openai.api_key = ''
 
 
-def tester(source_code):
+
+def tester(source_code , diagram_type):
 
 
     # Constructing the prompt for GPT-3.5 Turbo to generate a Mermaid flowchart
-    prompt = f"Translate the following code into a Mermaid diagram to visually represent the flow of the program. Just return the mermaid code. Do not embed it within ``` mermaid ```:\n{source_code}\n"
+    prompt = f"Translate the following code into a Mermaid diagram which is a {diagram_type}to visually represent the flow of the program. Just return the mermaid code. Do not embed it within ``` mermaid ```:\n{source_code}\n"
 
     response = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
@@ -27,7 +28,7 @@ def tester(source_code):
     )
 
     # Print the Mermaid diagram
-    return extract_and_print(response['choices'][0]['message']['content'])
+    return response['choices'][0]['message']['content']
     # return response['choices'][0]['message']['content']
 
 # tester(source_code)
