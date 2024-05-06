@@ -57,6 +57,38 @@ if __name__ == '__main__':
     # Display content based on the current page stored in session state
     if st.session_state['page'] == 'github_repo':
         st.title("GitHub Repo Flow Chart")
+        # Inform the user about how to input the GitHub repository path
+        st.write("Enter your GitHub repository path after 'https://github.com/' (e.g., username/repository):")
+        # Text input for user to specify the remainder of the URL
+        github_repo = st.text_input("GitHub Repository Path:", key="github_repo")
+
+        diagram_type = st.radio("Select Diagram Type:",
+                                ("Sequence Diagram", "Class Diagram",
+                                 "Entity Relationship Diagram", "State Diagram",
+                                 "User Journey Diagram"))
+        # Check if the user input includes 'https://github.com/'
+        if "https://github.com/" in github_repo:
+            st.error(
+                "Please enter only the repository path after 'https://github.com/'. Do not include 'https://github.com/' in the input.")
+        else:
+            full_github_link = f"https://github.com/{github_repo}"
+            if st.button("Generate Diagram") and github_repo:
+                # Logic to process the GitHub repo, e.g., fetching data
+                st.write(f"Fetching data from: {full_github_link}")
+                # Your code for GitHub repo processing here
+
+
+
+                #load mermaid here
+                render_mermaid(tester(get_repository_files_contents("Meskine-Yasser/AI_Expert_System"),diagram_type))
+                print("render complete")
+
+
+
+
+
+
+
 
         # Placeholder for your content rendering function
         # Example: render_mermaid(tester(get_repository_files_contents("your-repo/your-project")))
