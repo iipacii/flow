@@ -54,11 +54,10 @@ def retrieve_file_contents(repo_url, important_files):
     return file_contents_str
 
 
-def main():
+def get_repository_files_contents(repo_url):
     load_api_key()
 
     # Get the repository contents
-    repo_url = "iipacii/iipacii.github.io"
     repo_info = get_repo_contents(repo_url)
 
     # Initialize the conversation
@@ -79,6 +78,14 @@ def main():
     file_contents_str = retrieve_file_contents(repo_url, important_files)
 
     # Print the contents of the important files
+    # print(f"\n\nContents of the important files:\n\n{file_contents_str}")
+
+    return file_contents_str
+
+
+def main():
+    repo_url = "amith-2001/RealEstateApplication"
+    file_contents_str = get_repository_files_contents(repo_url)
     print(f"\n\nContents of the important files:\n\n{file_contents_str}")
 
 
