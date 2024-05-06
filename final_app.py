@@ -68,12 +68,14 @@ if __name__ == '__main__':
         user_code = st.text_area("Paste your code here:", height=300)
         # Radio buttons for diagram type selection
         diagram_type = st.radio("Select Diagram Type:",
-                                ("Sequence Diagram", "Class Diagram",
+                                ("Sequence", "Class",
                                  "Entity Relationship Diagram", "State Diagram",
                                  "User Journey Diagram"))
         if st.button("Generate Diagram"):
+            # print("inside buttion ")
             # Call to the tester function with user's code and selected diagram type
-            diagram_code = tester(user_code, diagram_type)
+            diagram_code = tester(user_code)
+            print(diagram_code)
             render_mermaid(diagram_code)
 
 
