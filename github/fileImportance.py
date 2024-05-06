@@ -56,7 +56,7 @@ def retrieve_file_contents(repo_url, important_files):
 
 
 def get_repository_files_contents(repo_url):
-    # load_api_key()
+    load_api_key()
 
     # Get the repository contents
     repo_info = get_repo_contents(repo_url)
