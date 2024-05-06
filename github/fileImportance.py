@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from github.fileTree import get_repo_contents
 
 openai.api_key = ''
+
+
 def load_api_key():
     # Load the OpenAI API key from the .env file
     load_dotenv()
