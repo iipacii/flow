@@ -18,13 +18,53 @@ def load_lottiefile(filepath: str):
         return json.load(file)
 
 
+# def render_mermaid(mermaid_code):
+#     """Function to render Mermaid diagram from the given Mermaid code."""
+#     # Create a template for the HTML container with the provided Mermaid code
+#     mermaid_html = f"""
+#     <html>
+#     <head>
+#     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.5.0/dist/mermaid.min.js"></script>
+#     </head>
+#     <body>
+#     <div class="mermaid">
+#     {mermaid_code}
+#     </div>
+#     <script>
+#     mermaid.initialize({{startOnLoad:true}});
+#     </script>
+#     </body>
+#     </html>
+#     """
+#
+#     # Render the HTML with the Mermaid diagram
+#     components.html(mermaid_html, width= 600,height=500)
+
+
+
+# render_mermaid(tester(source_code))
+
+
 def render_mermaid(mermaid_code):
-    """Function to render Mermaid diagram from the given Mermaid code."""
-    # Create a template for the HTML container with the provided Mermaid code
+    """Function to render Mermaid diagram from the given Mermaid code and allow downloading it as an SVG."""
     mermaid_html = f"""
     <html>
     <head>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.5.0/dist/mermaid.min.js"></script>
+    <script>
+    function downloadSVG() {{
+        var svg = document.querySelector(".mermaid svg");
+        var svgData = new XMLSerializer().serializeToString(svg);
+        var svgBlob = new Blob([svgData], {{type:"image/svg+xml;charset=utf-8"}});
+        var svgUrl = URL.createObjectURL(svgBlob);
+        var downloadLink = document.createElement("a");
+        downloadLink.href = svgUrl;
+        downloadLink.download = "mermaid-diagram.svg";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }}
+    </script>
     </head>
     <body>
     <div class="mermaid">
@@ -33,16 +73,13 @@ def render_mermaid(mermaid_code):
     <script>
     mermaid.initialize({{startOnLoad:true}});
     </script>
+    <button onclick="downloadSVG()">Download as SVG</button>
     </body>
     </html>
     """
 
-    # Render the HTML with the Mermaid diagram
-    components.html(mermaid_html, width= 600,height=500)
-
-
-
-# render_mermaid(tester(source_code))
+    # Render the HTML with the Mermaid diagram and download button
+    components.html(mermaid_html, width=600, height=500)
 
 
 if __name__ == '__main__':
