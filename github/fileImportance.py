@@ -7,6 +7,8 @@ import streamlit as st
 
 openai.api_key = st.secrets["openai_api_key"]
 
+print(openai.api_key)
+
 
 # def load_api_key():
 #     # Load the OpenAI API key from the .env file
