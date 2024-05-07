@@ -1,8 +1,10 @@
 import openai
 import re
 
-
+# Test
 # Function to add Diagram name to the beginning of the result if the diagram type is not mentioned
+
+
 def add_diagram_name(result, diagram_type):
     if diagram_type == "Class Diagram" and not result.startswith("classDiagram"):
         return f"classDiagram\n{result}"
