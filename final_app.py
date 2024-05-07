@@ -8,10 +8,6 @@ import json
 from typing_live import live_typing_effect
 
 
-
-
-
-
 def load_lottiefile(filepath: str):
     """ Load a Lottie animation from a JSON file located at filepath """
     with open(filepath, 'r') as file:
@@ -41,7 +37,6 @@ def load_lottiefile(filepath: str):
 #     components.html(mermaid_html, width= 600,height=500)
 
 
-
 # render_mermaid(tester(source_code))
 
 
@@ -67,16 +62,17 @@ def render_mermaid(mermaid_code):
     </script>
     </head>
     <body>
+    <!-- Button moved to the top of the diagram -->
+    <button onclick="downloadSVG()">Download as SVG</button>
     <div class="mermaid">
     {mermaid_code}
     </div>
     <script>
     mermaid.initialize({{startOnLoad:true}});
     </script>
-    <button onclick="downloadSVG()">Download as SVG</button>
     </body>
-    </html>
-    """
+   </html>
+   """
 
     # Render the HTML with the Mermaid diagram and download button
     components.html(mermaid_html, width=600, height=500)
@@ -87,17 +83,15 @@ if __name__ == '__main__':
     if 'page' not in st.session_state:
         st.session_state['page'] = 'home'
 
-
-
-
-
     # Display content based on the current page stored in session state
     if st.session_state['page'] == 'github_repo':
         st.title("GitHub Repo Flow Chart")
         # Inform the user about how to input the GitHub repository path
-        st.write("Enter your GitHub repository path after 'https://github.com/' (e.g., username/repository):")
+        st.write(
+            "Enter your GitHub repository path after 'https://github.com/' (e.g., username/repository):")
         # Text input for user to specify the remainder of the URL
-        github_repo = st.text_input("GitHub Repository Path:", key="github_repo")
+        github_repo = st.text_input(
+            "GitHub Repository Path:", key="github_repo")
 
         diagram_type = st.radio("Select Diagram Type:",
                                 ("Sequence Diagram", "Class Diagram",
@@ -114,18 +108,10 @@ if __name__ == '__main__':
                 st.write(f"Fetching data from: {full_github_link}")
                 # Your code for GitHub repo processing here
 
-
-
-                #load mermaid here
-                render_mermaid(tester(get_repository_files_contents("Meskine-Yasser/AI_Expert_System"),diagram_type))
+                # load mermaid here
+                render_mermaid(tester(get_repository_files_contents(
+                    str(github_repo)), diagram_type))
                 print("render complete")
-
-
-
-
-
-
-
 
         # Placeholder for your content rendering function
         # Example: render_mermaid(tester(get_repository_files_contents("your-repo/your-project")))
@@ -148,17 +134,17 @@ if __name__ == '__main__':
             print(diagram_code)
             render_mermaid(diagram_code)
 
-
         # Placeholder for your content rendering function
         # Example: render_mermaid(tester(your_code))
 
     # Load and display Lottie animation on the homepage
     if st.session_state['page'] == 'home':
-        st.title("Welcome! Let's generate Flow Charts from your GitHub repo")
+        st.title(
+            "Welcome! Let's generate Flow Charts from your GitHub Repositories or Code! 🚀")
         lottie_animation_path = "assets/Animation - 1715030681143.json"
         lottie_animation = load_lottiefile(lottie_animation_path)
         st_lottie(lottie_animation, height=200, width=550, key="example")
-        live_typing_effect("hello, I am GitHub hero", speed=100)
+        live_typing_effect("Hello, I'm your AI Flowchart Generator! 🚀 Just send over your code or GitHub repository, and I'll transform it into a sleek, easy-to-understand flow diagram. Let's streamline your work and make your projects visually engaging!", speed=25)
         col1, col2 = st.columns(2)
 
         with col1:
@@ -170,5 +156,3 @@ if __name__ == '__main__':
             if st.button('Generate from Code'):
                 st.session_state['page'] = 'code'
                 st.experimental_rerun()
-
-

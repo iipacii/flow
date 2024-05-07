@@ -4,14 +4,14 @@ import openai
 from dotenv import load_dotenv
 from github.fileTree import get_repo_contents
 
-openai.api_key = 'sk-proj-n6QYMzfgWDC2Oa5sUzwCT3BlbkFJXcoNFfyHvmMyRWOnL2Na'
+openai.api_key = 'OPENAI_API_KEY'
 
 
-def load_api_key():
-    # Load the OpenAI API key from the .env file
-    load_dotenv()
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    print(openai.api_key)
+# def load_api_key():
+#     # Load the OpenAI API key from the .env file
+#     load_dotenv()
+#     openai.api_key = os.getenv("OPENAI_API_KEY")
+#     print(openai.api_key)
 
 
 def get_important_files(repo_url, messages):
