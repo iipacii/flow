@@ -1,7 +1,7 @@
 import os
 import requests
 import openai
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from github.fileTree import get_repo_contents
 
 openai.api_key = 'OPENAI_API_KEY'
