@@ -3,8 +3,9 @@ import requests
 import openai
 # from dotenv import load_dotenv
 from github.fileTree import get_repo_contents
+import streamlit as st
 
-openai.api_key = 'OPENAI_API_KEY'
+openai.api_key = st.secrets["openai_api_key"]
 
 
 # def load_api_key():
